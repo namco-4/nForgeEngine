@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Mesh.h"
 #include "Texture.h"
+#include "Transform.h"
 
 using namespace std;
 
@@ -15,15 +16,23 @@ int main(int argc, char** argv) {
 	Mesh mesh(vertices, sizeof(vertices)/sizeof(vertices[0]));
 	Shader shader("./res/basicShader");
 	Texture texture("./res/testImage.jpg");
+	Transform transform;
+
+	float counter = 0.0f;
 
 	while (!display.isClosed()) {
 		display.Clear(0.0f, 0.15f, 0.3f, 1.0f);
 
+		transform.GetPos().x = sinf(counter);
+		transform.GetRot().z = cosf(counter);
+
 		shader.Bind();
 		texture.Bind(0);
+		shader.Update(transform);
 		mesh.Draw();
 
 		display.Update();
+		counter += 0.01f;
 	}
 
 	return 0;

@@ -5,7 +5,9 @@ attribute vec2 texCoord;
 
 varying vec2 texCoord0;
 
+uniform mat4 transformMatrix;
+
 void main() {
+	gl_Position = transformMatrix * vec4(position, 1.0);
 	texCoord0 = texCoord;
-	gl_Position = vec4(position, 1.0);
 }
