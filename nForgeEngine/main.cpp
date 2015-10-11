@@ -5,6 +5,7 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include "Transform.h"
+#include "Camera.h"
 
 using namespace std;
 
@@ -16,6 +17,7 @@ int main(int argc, char** argv) {
 	Mesh mesh(vertices, sizeof(vertices)/sizeof(vertices[0]));
 	Shader shader("./res/basicShader");
 	Texture texture("./res/testImage.jpg");
+	Camera camera(glm::vec3(0,0,-3), 90.0f, 16.0f/9.0f, 0.1f, 1000.0f);
 	Transform transform;
 
 	float counter = 0.0f;
@@ -28,7 +30,7 @@ int main(int argc, char** argv) {
 
 		shader.Bind();
 		texture.Bind(0);
-		shader.Update(transform);
+		shader.Update(transform, camera);
 		mesh.Draw();
 
 		display.Update();

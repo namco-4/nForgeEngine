@@ -4,6 +4,7 @@
 #include <string>
 #include <GL\glew.h>
 #include "Transform.h"
+#include "Camera.h"
 
 class Shader {
 
@@ -11,7 +12,7 @@ public:
 	Shader(const std::string&);
 
 	void Bind();
-	void Update(const Transform&);
+	void Update(const Transform&, const Camera&);
 
 	virtual ~Shader();
 protected:
